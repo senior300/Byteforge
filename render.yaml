@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: byteforge-site
+    env: python
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn byteforge_site.wsgi --log-file -
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_SECRET_KEY
+        value: "replace-with-your-secret-key"
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: EMAIL_HOST_USER
+        value: "ogelobilly12@gmail.com"
+      - key: EMAIL_HOST_PASSWORD
+        value: "replace-with-gmail-app-password"
+      - key: CONTACT_RECIPIENTS
+        value: "ogelobilly12@gmail.com"
